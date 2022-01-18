@@ -24,7 +24,7 @@ const PageTitle = ({children}) => {
 
 const SectionTitle = ({children, ...rest}) => {
     return (
-        <Title fontSize={42} mt={2} {...rest}>
+        <Title fontSize={52} mt={2} {...rest}>
             {children}
         </Title>
     )
