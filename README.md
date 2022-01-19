@@ -3,7 +3,7 @@
 A set of components and utilities for use in building CRF React web apps.
 
 ## Installation
-`npm install @crf/web-app-library --save`
+`npm install git+ssh://git@github.com:enmielado/crf-web-app-components.git --save`
 
 ## Local Development
 

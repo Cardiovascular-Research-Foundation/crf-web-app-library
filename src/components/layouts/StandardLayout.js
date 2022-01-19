@@ -1,22 +1,19 @@
 import {useState} from 'react';
 import Head from "next/head";
 import { useSession } from "next-auth/react"
-import {useMediaQuery, CssBaseline} from '@mui/material';
+import {useMediaQuery} from '@mui/material';
 import {
-    Paper, Box, AppBar, Toolbar, Divider,
+    Box, AppBar, Toolbar, Divider,
     Drawer,
-    Card, CardContent,
-    IconButton, Avatar,
-    List, ListItemText, ListItemIcon,
+    IconButton,
     Typography,
-    Menu, MenuItem,
 } from '@mui/material';
 import {Menu as MenuIcon} from '@mui/icons-material';
 import { blue, amber, blueGrey } from "@mui/material/colors";
 
-import {useAppConfig} from "framework/providers/AppConfigProvider";
-import CrfMenu from 'framework/nav/Menu';
-import UserMenu from "framework/nav/UserMenu";
+import {useAppConfig} from "../providers/AppConfigProvider";
+import CrfMenu from '../nav/Menu';
+import UserMenu from "../nav/UserMenu";
 
 const drawerWidth = 260;
 
