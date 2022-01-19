@@ -13,6 +13,6 @@ export {
     Guard,
     Center, PlainLayout, StandardLayout,
     Menu, UserMenu,
-    AppConfigProvider, useAppConfig
+    AppConfigProvider, useAppConfig,
     Link
 }
