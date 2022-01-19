@@ -1,18 +1,23 @@
 {
-  "name": "crf-webapp-components",
+  "name": "@crf/web-app-library",
   "version": "1.0.0",
-  "description": "Components for the CRF Web Application Framework",
+  "description": "CRF web application library for CRF React web applications",
   "main": "src/index.jsx",
   "scripts": {
-    "start": "npx babel src --watch --out-dir dist",
-    "build": "npx babel src --out-dir dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "link": "npm link $SRC/node_modules/react $SRC/node_modules/@mui/material $SRC/node_modules/@mui/icons-material $SRC/node_modules/next-auth"
+
   },
   "author": "CRF Dev Team",
-  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/enmielado/crf-webapp-components.git"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.3.0",
+    "@mui/material": "^5.3.0",
+    "next-auth": "^4.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

@@ -1,4 +1,4 @@
-import {Typography} from "@mui/material";
+import {Typography, Button} from "@mui/material";
 
 const Title = ({children, ...rest}) => {
 
@@ -10,6 +10,7 @@ const Title = ({children, ...rest}) => {
     return (
         <Typography gutterBottom component="div" fontWeight={800} fontSize={32} {...rest}>
             {children}
+            <Button>check on you</Button>
         </Typography>
     )
 }
