@@ -6,11 +6,13 @@ import StandardLayout from "./components/layouts/StandardLayout";
 import Menu from "./components/nav/Menu";
 import UserMenu from "./components/nav/UserMenu";
 import {AppConfigProvider} from "./components/providers/AppConfigProvider";
+import Link from "./components/Link"
 
 export {
     Title, PageTitle, SectionTitle,
     Guard,
     Center, PlainLayout, StandardLayout,
     Menu, UserMenu,
-    AppConfigProvider
+    AppConfigProvider,
+    Link
 }
