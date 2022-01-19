@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useSession} from "next-auth/react";
-// import Link from 'src/lib/Link'
+import Link from '../Link'
 import {
     Divider, Collapse,
     List, ListItem, ListItemIcon, ListItemText,
