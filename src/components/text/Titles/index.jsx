@@ -15,7 +15,7 @@ const Title = ({ children, ...rest }) => {
 
 const SectionTitle = ({ children, ...rest }) => {
     return (
-        <Title mt={0} color="primary.main" {...rest}>
+        <Title mt={0} color="secondary.main" {...rest}>
             {children}
         </Title>
     )
@@ -23,7 +23,7 @@ const SectionTitle = ({ children, ...rest }) => {
 
 const PageTitle = ({ children, ...rest }) => {
     return (
-        <Typography variant="h1" mb={2} color="#555" {...rest}>
+        <Typography variant="h1" mb={2} color="secondary.main" {...rest}>
             {children}
         </Typography>
     )

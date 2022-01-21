@@ -1,6 +1,6 @@
 import { createTheme, responsiveFontSizes } from "@mui/material"
 
-export const createMergedMuiTheme = (baseTheme, appTheme) => {
+export const createMergedMuiTheme = (baseTheme = {}, appTheme = {}) => {
     const mergedTheme = {
         ...baseTheme,
         ...appTheme,

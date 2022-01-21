@@ -1,13 +1,27 @@
-import { amber, blueGrey } from "@mui/material/colors"
+import { blueGrey } from "@mui/material/colors"
 
 export default {
     palette: {
         primary: {
-            main: blueGrey[100],
+            main: "#e92530",
+            // light: string;
+            // dark: string;
+            // contrastText: string;
         },
-        secondary: amber,
-        grey: {
-            main: blueGrey[100],
+        secondary: {
+            main: "#006eac",
+            light: "#2d8ec1",
+            bright: "#00fbfc",
+        },
+        grey: {},
+        menu: {
+            bg: blueGrey[900],
+            text: "#fff",
+            subhead: "#00fbfc",
+        },
+        page: {
+            bg: blueGrey[50],
+            bgDark: "#006eac",
         },
     },
     typography: {
@@ -45,26 +59,12 @@ export default {
                 },
             },
         },
-        MuiDrawer: {
-            styleOverrides: {
-                paper: {
-                    backgroundColor: blueGrey[700], // "rgb(55, 111, 208)"
-                },
-            },
-        },
         MuiListItem: {
             styleOverrides: {
                 root: {
                     a: {
                         textDecoration: "none",
                     },
-                },
-            },
-        },
-        MuiListItemIcon: {
-            styleOverrides: {
-                root: {
-                    minWidth: "32px",
                 },
             },
         },

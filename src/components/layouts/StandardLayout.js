@@ -10,14 +10,15 @@ import {
     Drawer,
     IconButton,
     Typography,
+    Stack,
 } from "@mui/material"
 import { Menu as MenuIcon } from "@mui/icons-material"
-import { blue, amber, blueGrey } from "@mui/material/colors"
 
 import { useAppConfig } from "../providers/AppConfigProvider"
 import CrfMenu from "../nav/Menu"
 import UserMenu from "../nav/UserMenu"
 import Link from "../Link"
+import CrfHeart from "../graphics/CrfHeart"
 
 const drawerWidth = 260
 
@@ -33,13 +34,20 @@ function StandardLayout({ children, menu, userMenu }) {
 
     const drawer = (
         <div>
-            <Box p={2}>
+            <Stack direction="row" py={2} px={0.5}>
+                <CrfHeart
+                    fontSize="medium"
+                    sx={{
+                        minWidth: "40px",
+                        transform: "translateY(4px)",
+                    }}
+                />
                 <Typography lineHeight={1.2} fontSize={28} fontWeight={400}>
                     <Link href="/" color="#fff" sx={{ textDecoration: "none" }}>
                         {config.name}
                     </Link>
                 </Typography>
-            </Box>
+            </Stack>
             <Divider />
             {menu && <CrfMenu menu={menu} />}
         </div>
@@ -50,7 +58,7 @@ function StandardLayout({ children, menu, userMenu }) {
             <Head>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Box sx={{ display: "flex", bgcolor: blueGrey[50] }}>
+            <Box sx={{ display: "flex", backgroundColor: "page.bg" }}>
                 <AppBar
                     position="fixed"
                     sx={{
@@ -66,13 +74,12 @@ function StandardLayout({ children, menu, userMenu }) {
                             onClick={handleDrawerToggle}
                             sx={{ mr: 2, display: { sm: "none" } }}
                         >
-                            <MenuIcon sx={{ color: blue[900] }} />
+                            <MenuIcon sx={{ color: "primary.main" }} />
                         </IconButton>
                         <Typography
                             variant="h6"
                             noWrap
                             component="div"
-                            color="#333"
                             sx={{ flexGrow: 1 }}
                         ></Typography>
                         <Box sx={{ flexGrow: 0 }}>
@@ -96,6 +103,7 @@ function StandardLayout({ children, menu, userMenu }) {
                                 "& .MuiDrawer-paper": {
                                     boxSizing: "border-box",
                                     width: drawerWidth,
+                                    backgroundColor: "secondary.main",
                                 },
                             }}
                         >
@@ -108,7 +116,7 @@ function StandardLayout({ children, menu, userMenu }) {
                                 "& .MuiDrawer-paper": {
                                     boxSizing: "border-box",
                                     width: drawerWidth,
-                                    backgroundColor: "grey.main",
+                                    backgroundColor: "secondary.main",
                                 },
                             }}
                             open
@@ -124,6 +132,7 @@ function StandardLayout({ children, menu, userMenu }) {
                         p: 3,
                         width: { sm: `calc(100% - ${drawerWidth}px)` },
                         height: "100vh",
+                        backgroundColor: "page.bg",
                     }}
                 >
                     <Toolbar></Toolbar>
