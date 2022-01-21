@@ -12,11 +12,12 @@ import {
     Button,
 } from "@mui/material"
 import { AccountCircle, Settings, Logout } from "@mui/icons-material"
-import { blueGrey } from "@mui/material/colors"
+import { useAppConfig } from "../providers/AppConfigProvider"
 
 export default function UserMenu() {
     const [anchorElUser, setAnchorElUser] = useState(null)
     const { data: session } = useSession()
+    const { config } = useAppConfig()
 
     const handleOpenUserMenu = event => {
         setAnchorElUser(event.currentTarget)
@@ -27,7 +28,10 @@ export default function UserMenu() {
 
     if (!session) {
         return (
-            <Button variant="contained" onClick={() => signIn("okta")}>
+            <Button
+                variant="contained"
+                onClick={() => signIn(config.authProvider || "okta")}
+            >
                 Login
             </Button>
         )
@@ -36,7 +40,9 @@ export default function UserMenu() {
     return (
         <>
             <Stack direction="row" alignItems="center" spacing={1}>
-                <Typography>{session.user.name}</Typography>
+                <Typography color="secondary.main">
+                    {session.user.name}
+                </Typography>
                 <Tooltip title="User Menu">
                     <IconButton
                         aria-label="User Menu"
@@ -48,7 +54,7 @@ export default function UserMenu() {
                     >
                         <AccountCircle
                             sx={{
-                                color: blueGrey[300],
+                                color: "secondary.main",
                                 width: "36px",
                                 height: "36px",
                             }}
@@ -75,13 +81,19 @@ export default function UserMenu() {
             >
                 <MenuItem component={Link} href="/user/profile">
                     <ListItemIcon>
-                        <AccountCircle fontSize="small" />
+                        <AccountCircle
+                            fontSize="small"
+                            sx={{ color: "secondary.main" }}
+                        />
                     </ListItemIcon>
                     Profile
                 </MenuItem>
                 <MenuItem component={Link} href="/user/settings">
                     <ListItemIcon>
-                        <Settings fontSize="small" />
+                        <Settings
+                            fontSize="small"
+                            sx={{ color: "secondary.main" }}
+                        />
                     </ListItemIcon>
                     Settings
                 </MenuItem>
@@ -89,7 +101,10 @@ export default function UserMenu() {
                     onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                 >
                     <ListItemIcon>
-                        <Logout fontSize="small" />
+                        <Logout
+                            fontSize="small"
+                            sx={{ color: "secondary.main" }}
+                        />
                     </ListItemIcon>
                     Logout
                 </MenuItem>

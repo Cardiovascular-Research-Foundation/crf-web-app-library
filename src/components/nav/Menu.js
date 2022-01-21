@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 import Link from "../Link"
 import {
     Divider,
@@ -16,7 +17,7 @@ function Menu({ menu }) {
     return (
         <List>
             {menu.map((item, i) => {
-                return <MenuItem {...item} key={item.label || i} level={0} />
+                return <MenuItem {...item} key={item.path || i} level={0} />
             })}
         </List>
     )
@@ -25,6 +26,7 @@ function Menu({ menu }) {
 function MenuItem(item) {
     const [open, setOpen] = useState(false)
     const { data: session } = useSession()
+    const router = useRouter()
 
     if (item.access && !session) return false
 
@@ -33,7 +35,7 @@ function MenuItem(item) {
             <ListSubheader
                 inset
                 sx={{
-                    color: "#fff",
+                    color: "menu.subhead",
                     backgroundColor: "transparent",
                     opacity: 0.8,
                     paddingLeft: "47px",
@@ -49,14 +51,28 @@ function MenuItem(item) {
             <Divider
                 variant="inset"
                 component="li"
-                sx={{ borderColor: "#fff", opacity: 0.3, mx: 2, my: 2 }}
+                sx={{
+                    borderColor: "secondary.light",
+                    mx: 2,
+                    mt: 2,
+                    mb: 1,
+                }}
             />
         )
     }
 
     return (
         <>
-            <ListItem button component="li">
+            <ListItem
+                button
+                component="li"
+                selected={router.asPath === item.path}
+                sx={{
+                    "&:hover, &.Mui-selected": {
+                        backgroundColor: "rgba(0, 0, 0, 0.12)",
+                    },
+                }}
+            >
                 {item.icon && (
                     <ListItemIcon
                         sx={{
@@ -64,6 +80,7 @@ function MenuItem(item) {
                             color: "white",
                             opacity: 0.8,
                             fontSize: "1.2rem",
+                            minWidth: "32px",
                         }}
                     >
                         {item.icon}
@@ -77,6 +94,7 @@ function MenuItem(item) {
                             fontSize: 14,
                             fontWeight: "medium",
                             letterSpacing: 0,
+                            color: "menu.text",
                         }}
                         sx={{
                             opacity: 1,
@@ -96,10 +114,10 @@ function MenuItem(item) {
             {item.children && (
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div">
-                        {item.children.map(child => (
+                        {item.children.map((child, j) => (
                             <MenuItem
                                 {...child}
-                                key={child.label}
+                                key={child.path || j}
                                 level={item.level + 1}
                             />
                         ))}
