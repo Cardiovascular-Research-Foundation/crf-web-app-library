@@ -1,56 +1,56 @@
-import {useState} from 'react';
-import Head from "next/head";
+import { useState } from "react"
+import Head from "next/head"
 import { useSession } from "next-auth/react"
-import {useMediaQuery} from '@mui/material';
+import { useMediaQuery } from "@mui/material"
 import {
-    Box, AppBar, Toolbar, Divider,
+    Box,
+    AppBar,
+    Toolbar,
+    Divider,
     Drawer,
     IconButton,
     Typography,
-} from '@mui/material';
-import {Menu as MenuIcon} from '@mui/icons-material';
-import { blue, amber, blueGrey } from "@mui/material/colors";
+} from "@mui/material"
+import { Menu as MenuIcon } from "@mui/icons-material"
+import { blue, amber, blueGrey } from "@mui/material/colors"
 
-import {useAppConfig} from "../providers/AppConfigProvider";
-import CrfMenu from '../nav/Menu';
-import UserMenu from "../nav/UserMenu";
+import { useAppConfig } from "../providers/AppConfigProvider"
+import CrfMenu from "../nav/Menu"
+import UserMenu from "../nav/UserMenu"
+import Link from "../Link"
 
-const drawerWidth = 260;
+const drawerWidth = 260
 
-function StandardLayout({children, menu, userMenu}) {
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const isMobile = useMediaQuery('(max-width:600px)');
-    const {config} = useAppConfig()
+function StandardLayout({ children, menu, userMenu }) {
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const isMobile = useMediaQuery("(max-width:600px)")
+    const { config } = useAppConfig()
     const { data: session } = useSession()
 
     const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
+        setMobileOpen(!mobileOpen)
+    }
 
     const drawer = (
         <div>
             <Box p={2}>
-                <Typography
-                    lineHeight={1.2}
-                    fontSize={28}
-                    fontWeight={400}
-                >
-                    {config.name}
+                <Typography lineHeight={1.2} fontSize={28} fontWeight={400}>
+                    <Link href="/" color="#fff" sx={{ textDecoration: "none" }}>
+                        {config.name}
+                    </Link>
                 </Typography>
             </Box>
             <Divider />
-            {menu && (
-                <CrfMenu menu={menu}/>
-            )}
+            {menu && <CrfMenu menu={menu} />}
         </div>
-    );
+    )
 
     return (
         <>
             <Head>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Box sx={{ display: 'flex', bgcolor: blueGrey[50]}}>
+            <Box sx={{ display: "flex", bgcolor: blueGrey[50] }}>
                 <AppBar
                     position="fixed"
                     sx={{
@@ -64,11 +64,17 @@ function StandardLayout({children, menu, userMenu}) {
                             aria-label="open drawer"
                             edge="start"
                             onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: 'none' } }}
+                            sx={{ mr: 2, display: { sm: "none" } }}
                         >
-                            <MenuIcon sx={{color: blue[900]}} />
+                            <MenuIcon sx={{ color: blue[900] }} />
                         </IconButton>
-                        <Typography variant="h6" noWrap component="div" color="#333" sx={{ flexGrow: 1 }}></Typography>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            color="#333"
+                            sx={{ flexGrow: 1 }}
+                        ></Typography>
                         <Box sx={{ flexGrow: 0 }}>
                             <UserMenu />
                         </Box>
@@ -87,7 +93,10 @@ function StandardLayout({children, menu, userMenu}) {
                                 keepMounted: true, // Better open performance on mobile.
                             }}
                             sx={{
-                                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                                "& .MuiDrawer-paper": {
+                                    boxSizing: "border-box",
+                                    width: drawerWidth,
+                                },
                             }}
                         >
                             {drawer}
@@ -96,7 +105,11 @@ function StandardLayout({children, menu, userMenu}) {
                         <Drawer
                             variant="permanent"
                             sx={{
-                                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                                "& .MuiDrawer-paper": {
+                                    boxSizing: "border-box",
+                                    width: drawerWidth,
+                                    backgroundColor: "grey.main",
+                                },
                             }}
                             open
                         >
@@ -110,7 +123,7 @@ function StandardLayout({children, menu, userMenu}) {
                         flexGrow: 1,
                         p: 3,
                         width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        height: '100vh'
+                        height: "100vh",
                     }}
                 >
                     <Toolbar></Toolbar>
@@ -118,7 +131,7 @@ function StandardLayout({children, menu, userMenu}) {
                 </Box>
             </Box>
         </>
-    );
+    )
 }
 
-export default StandardLayout;
+export default StandardLayout

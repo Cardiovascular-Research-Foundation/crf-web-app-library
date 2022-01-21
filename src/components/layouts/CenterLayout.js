@@ -1,7 +1,7 @@
-import {Grid} from "@mui/material";
-import {blueGrey} from "@mui/material/colors";
+import { Grid } from "@mui/material"
+import { blueGrey } from "@mui/material/colors"
 
-export default function Center({children}) {
+export default function CenterLayout({ children }) {
     return (
         <Grid
             container
@@ -9,7 +9,7 @@ export default function Center({children}) {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            style={{ minHeight: '100vh' }}
+            style={{ minHeight: "100vh" }}
             bgcolor={blueGrey[500]}
         >
             <Grid item xs={3}>

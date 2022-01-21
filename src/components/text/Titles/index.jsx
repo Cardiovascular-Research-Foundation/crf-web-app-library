@@ -1,36 +1,32 @@
-import {Typography, Button} from "@mui/material";
+import { Typography } from "@mui/material"
 
-const Title = ({children, ...rest}) => {
-
+const Title = ({ children, ...rest }) => {
     if (rest.noMarginTop) {
         rest.mt = 0
         delete rest.noMarginTop
     }
 
     return (
-        <Typography gutterBottom component="div" fontWeight={800} fontSize={32} {...rest}>
+        <Typography variant="h3" {...rest}>
             {children}
-            <Button>check on you</Button>
         </Typography>
     )
 }
 
-const PageTitle = ({children}) => {
+const SectionTitle = ({ children, ...rest }) => {
     return (
-        <Title>
+        <Title mt={0} color="primary.main" {...rest}>
             {children}
         </Title>
     )
 }
 
-const SectionTitle = ({children, ...rest}) => {
+const PageTitle = ({ children, ...rest }) => {
     return (
-        <Title fontSize={52} mt={2} {...rest}>
+        <Typography variant="h1" mb={2} color="#555" {...rest}>
             {children}
-        </Title>
+        </Typography>
     )
 }
 
-export {
-    Title, PageTitle, SectionTitle
-}
+export { Title, PageTitle, SectionTitle }
