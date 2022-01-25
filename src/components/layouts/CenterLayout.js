@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 
-export default function CenterLayout({ children }) {
+function CenterLayout({ children }) {
     return (
         <Grid
             container
@@ -17,3 +17,5 @@ export default function CenterLayout({ children }) {
         </Grid>
     )
 }
+
+export default CenterLayout

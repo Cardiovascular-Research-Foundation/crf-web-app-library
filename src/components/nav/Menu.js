@@ -64,7 +64,11 @@ function MenuItem(item) {
 
     return (
         <>
-            <ListItem component="li" disablePadding>
+            <ListItem
+                component="li"
+                disablePadding
+                onClick={item.action || null}
+            >
                 <Link href={item.path || ""} passHref>
                     <ListItemButton
                         component={item.path && "a"}
@@ -100,7 +104,9 @@ function MenuItem(item) {
                             }}
                             sx={{
                                 opacity: 1,
-                                paddingLeft: item.icon ? "0" : "32px",
+                                paddingLeft: item.icon
+                                    ? "0"
+                                    : 32 + item.level * 15 + "px",
                             }}
                         />
                         {item.submenu ? (

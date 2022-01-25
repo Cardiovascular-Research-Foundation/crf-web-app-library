@@ -74,7 +74,7 @@ function StandardLayout({ children, menu, userMenu }) {
                             onClick={handleDrawerToggle}
                             sx={{ mr: 2, display: { sm: "none" } }}
                         >
-                            <MenuIcon sx={{ color: "primary.main" }} />
+                            <MenuIcon sx={{ color: "secondary.main" }} />
                         </IconButton>
                         <Typography
                             variant="h6"
