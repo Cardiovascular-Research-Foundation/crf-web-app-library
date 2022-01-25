@@ -1,6 +1,9 @@
 import { Box, CircularProgress, Typography } from "@mui/material"
 
-const Spinner = ({ label, position = "center" }) => {
+const Spinner = ({ label, position = "center", color = "primary" }) => {
+    const resolvedColor =
+        color[0] === "#" ? { sx: { color: color } } : { color }
+
     return (
         <Box
             sx={{
@@ -10,7 +13,7 @@ const Spinner = ({ label, position = "center" }) => {
             }}
         >
             <Box>
-                <CircularProgress />
+                <CircularProgress {...resolvedColor} />
             </Box>
             {label && (
                 <Typography variant="body1" component="div">
