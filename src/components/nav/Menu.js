@@ -7,6 +7,7 @@ import {
     Collapse,
     List,
     ListItem,
+    ListItemButton,
     ListItemIcon,
     ListItemText,
     ListSubheader,
@@ -63,30 +64,31 @@ function MenuItem(item) {
 
     return (
         <>
-            <ListItem
-                button
-                component="li"
-                selected={router.asPath === item.path}
-                sx={{
-                    "&:hover, &.Mui-selected": {
-                        backgroundColor: "rgba(0, 0, 0, 0.12)",
-                    },
-                }}
-            >
-                {item.icon && (
-                    <ListItemIcon
-                        sx={{
-                            pl: item.level * 15 + "px",
-                            color: "white",
-                            opacity: 0.8,
-                            fontSize: "1.2rem",
-                            minWidth: "32px",
-                        }}
-                    >
-                        {item.icon}
-                    </ListItemIcon>
-                )}
-                <Link href={item.path || ""} color="primary">
+            <ListItem component="li" disablePadding>
+                <ListItemButton
+                    component={item.path && "a"}
+                    href={item.path || ""}
+                    onClick={() => item.children && setOpen(!open)}
+                    selected={router.asPath === item.path}
+                    sx={{
+                        "&:hover, &.Mui-selected": {
+                            backgroundColor: "rgba(0, 0, 0, 0.12)",
+                        },
+                    }}
+                >
+                    {item.icon && (
+                        <ListItemIcon
+                            sx={{
+                                pl: item.level * 15 + "px",
+                                color: "white",
+                                opacity: 0.8,
+                                fontSize: "1.2rem",
+                                minWidth: "32px",
+                            }}
+                        >
+                            {item.icon}
+                        </ListItemIcon>
+                    )}
                     <ListItemText
                         inset={!item.icon}
                         primary={item.label}
@@ -101,15 +103,14 @@ function MenuItem(item) {
                             paddingLeft: item.icon ? "0" : "32px",
                         }}
                     />
-                </Link>
-                {item.children && (
-                    <ListItemIcon
-                        onClick={() => setOpen(!open)}
-                        sx={{ color: "white" }}
-                    >
-                        {open ? <ExpandLess /> : <ExpandMore />}
-                    </ListItemIcon>
-                )}
+                    {item.children ? (
+                        open ? (
+                            <ExpandLess sx={{ color: "white" }} />
+                        ) : (
+                            <ExpandMore sx={{ color: "white" }} />
+                        )
+                    ) : null}
+                </ListItemButton>
             </ListItem>
             {item.children && (
                 <Collapse in={open} timeout="auto" unmountOnExit>
