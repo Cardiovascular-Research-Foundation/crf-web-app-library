@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
-import Link from "../Link"
+import Link from "next/link"
 import {
     Divider,
     Collapse,
@@ -65,57 +65,58 @@ function MenuItem(item) {
     return (
         <>
             <ListItem component="li" disablePadding>
-                <ListItemButton
-                    component={item.path && "a"}
-                    href={item.path || ""}
-                    onClick={() => item.children && setOpen(!open)}
-                    selected={router.asPath === item.path}
-                    sx={{
-                        "&:hover, &.Mui-selected": {
-                            backgroundColor: "rgba(0, 0, 0, 0.12)",
-                        },
-                    }}
-                >
-                    {item.icon && (
-                        <ListItemIcon
-                            sx={{
-                                pl: item.level * 15 + "px",
-                                color: "white",
-                                opacity: 0.8,
-                                fontSize: "1.2rem",
-                                minWidth: "32px",
-                            }}
-                        >
-                            {item.icon}
-                        </ListItemIcon>
-                    )}
-                    <ListItemText
-                        inset={!item.icon}
-                        primary={item.label}
-                        primaryTypographyProps={{
-                            fontSize: 14,
-                            fontWeight: "medium",
-                            letterSpacing: 0,
-                            color: "menu.text",
-                        }}
+                <Link href={item.path || ""} passHref>
+                    <ListItemButton
+                        component={item.path && "a"}
+                        onClick={() => item.submenu && setOpen(!open)}
+                        selected={router.asPath === item.path}
                         sx={{
-                            opacity: 1,
-                            paddingLeft: item.icon ? "0" : "32px",
+                            "&:hover, &.Mui-selected": {
+                                backgroundColor: "rgba(0, 0, 0, 0.12)",
+                            },
                         }}
-                    />
-                    {item.children ? (
-                        open ? (
-                            <ExpandLess sx={{ color: "white" }} />
-                        ) : (
-                            <ExpandMore sx={{ color: "white" }} />
-                        )
-                    ) : null}
-                </ListItemButton>
+                    >
+                        {item.icon && (
+                            <ListItemIcon
+                                sx={{
+                                    ml: item.level * 15 + "px",
+                                    color: "white",
+                                    opacity: 0.8,
+                                    fontSize: "1.2rem",
+                                    minWidth: "32px",
+                                }}
+                            >
+                                {item.icon}
+                            </ListItemIcon>
+                        )}
+                        <ListItemText
+                            inset={!item.icon}
+                            primary={item.label}
+                            primaryTypographyProps={{
+                                fontSize: 14,
+                                fontWeight: "medium",
+                                letterSpacing: 0,
+                                color: "menu.text",
+                            }}
+                            sx={{
+                                opacity: 1,
+                                paddingLeft: item.icon ? "0" : "32px",
+                            }}
+                        />
+                        {item.submenu ? (
+                            open ? (
+                                <ExpandLess sx={{ color: "white" }} />
+                            ) : (
+                                <ExpandMore sx={{ color: "white" }} />
+                            )
+                        ) : null}
+                    </ListItemButton>
+                </Link>
             </ListItem>
-            {item.children && (
+            {item.submenu && (
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div">
-                        {item.children.map((child, j) => (
+                        {item.submenu.map((child, j) => (
                             <MenuItem
                                 {...child}
                                 key={child.path || j}
