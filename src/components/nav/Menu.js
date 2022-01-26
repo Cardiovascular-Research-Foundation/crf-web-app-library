@@ -12,7 +12,7 @@ import {
     ListItemText,
     ListSubheader,
 } from "@mui/material"
-import { ExpandLess, ExpandMore } from "@mui/icons-material"
+import { ExpandLess, ExpandMore, OpenInNew } from "@mui/icons-material"
 
 function Menu({ menu }) {
     return (
@@ -72,6 +72,7 @@ function MenuItem(item) {
                 <Link href={item.path || ""} passHref>
                     <ListItemButton
                         component={item.path && "a"}
+                        target={item.isExternal ? "_blank" : null}
                         onClick={() => item.submenu && setOpen(!open)}
                         selected={router.asPath === item.path}
                         sx={{
@@ -109,6 +110,12 @@ function MenuItem(item) {
                                     : 32 + item.level * 15 + "px",
                             }}
                         />
+                        {item.isExternal ? (
+                            <OpenInNew
+                                sx={{ color: "white" }}
+                                fontSize="small"
+                            />
+                        ) : null}
                         {item.submenu ? (
                             open ? (
                                 <ExpandLess sx={{ color: "white" }} />
