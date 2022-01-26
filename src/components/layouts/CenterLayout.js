@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material"
+import DocHead from "./DocHead"
 
-function CenterLayout({ children }) {
+function CenterLayout({ children, title }) {
     return (
         <Grid
             container
@@ -11,6 +12,7 @@ function CenterLayout({ children }) {
             style={{ minHeight: "100vh" }}
             bgcolor="page.bgDark"
         >
+            <DocHead title={title} />
             <Grid item xs={3}>
                 {children}
             </Grid>

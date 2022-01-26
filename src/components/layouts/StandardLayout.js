@@ -19,10 +19,11 @@ import CrfMenu from "../nav/Menu"
 import UserMenu from "../nav/UserMenu"
 import Link from "../Link"
 import CrfHeart from "../graphics/CrfHeart"
+import DocHead from "./DocHead"
 
 const drawerWidth = 260
 
-function StandardLayout({ children, menu, userMenu }) {
+function StandardLayout({ children, menu, title }) {
     const [mobileOpen, setMobileOpen] = useState(false)
     const isMobile = useMediaQuery("(max-width:600px)")
     const { config } = useAppConfig()
@@ -54,92 +55,88 @@ function StandardLayout({ children, menu, userMenu }) {
     )
 
     return (
-        <>
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Box sx={{ display: "flex", backgroundColor: "page.bg" }}>
-                <AppBar
-                    position="fixed"
-                    sx={{
-                        width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        ml: { sm: `${drawerWidth}px` },
-                    }}
-                >
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="open drawer"
-                            edge="start"
-                            onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: "none" } }}
-                        >
-                            <MenuIcon sx={{ color: "secondary.main" }} />
-                        </IconButton>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1 }}
-                        ></Typography>
-                        <Box sx={{ flexGrow: 0 }}>
-                            <UserMenu />
-                        </Box>
-                    </Toolbar>
-                </AppBar>
-                <Box
-                    component="nav"
-                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                >
-                    {isMobile ? (
-                        <Drawer
-                            variant="temporary"
-                            open={mobileOpen}
-                            onClose={handleDrawerToggle}
-                            ModalProps={{
-                                keepMounted: true, // Better open performance on mobile.
-                            }}
-                            sx={{
-                                "& .MuiDrawer-paper": {
-                                    boxSizing: "border-box",
-                                    width: drawerWidth,
-                                    backgroundColor: "secondary.main",
-                                },
-                            }}
-                        >
-                            {drawer}
-                        </Drawer>
-                    ) : (
-                        <Drawer
-                            variant="permanent"
-                            sx={{
-                                "& .MuiDrawer-paper": {
-                                    boxSizing: "border-box",
-                                    width: drawerWidth,
-                                    backgroundColor: "secondary.main",
-                                },
-                            }}
-                            open
-                        >
-                            {drawer}
-                        </Drawer>
-                    )}
-                </Box>
-                <Box
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        width: { sm: `calc(100% - ${drawerWidth}px)` },
-                        height: "100vh",
-                        backgroundColor: "page.bg",
-                    }}
-                >
-                    <Toolbar></Toolbar>
-                    {children}
-                </Box>
+        <Box sx={{ display: "flex", backgroundColor: "page.bg" }}>
+            <DocHead title={title} />
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    ml: { sm: `${drawerWidth}px` },
+                }}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: "none" } }}
+                    >
+                        <MenuIcon sx={{ color: "secondary.main" }} />
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1 }}
+                    ></Typography>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <UserMenu />
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+            >
+                {isMobile ? (
+                    <Drawer
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
+                        sx={{
+                            "& .MuiDrawer-paper": {
+                                boxSizing: "border-box",
+                                width: drawerWidth,
+                                backgroundColor: "secondary.main",
+                            },
+                        }}
+                    >
+                        {drawer}
+                    </Drawer>
+                ) : (
+                    <Drawer
+                        variant="permanent"
+                        sx={{
+                            "& .MuiDrawer-paper": {
+                                boxSizing: "border-box",
+                                width: drawerWidth,
+                                backgroundColor: "secondary.main",
+                            },
+                        }}
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                )}
             </Box>
-        </>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    height: "100vh",
+                    backgroundColor: "page.bg",
+                }}
+            >
+                <Toolbar></Toolbar>
+                {children}
+            </Box>
+        </Box>
     )
 }
 
