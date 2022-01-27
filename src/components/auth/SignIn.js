@@ -26,7 +26,7 @@ export default function SignIn({ providers }) {
                                     borderColor: "white",
                                     "&:hover": {
                                         borderColor: "white",
-                                        backgroundColor: "secondary.dark",
+                                        backgroundColor: "primary.dark",
                                     },
                                 }}
                                 onClick={() =>

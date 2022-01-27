@@ -18,7 +18,7 @@ function PlainLayout({ children, title }) {
     return (
         <Box
             sx={{
-                backgroundColor: "page.bgDark",
+                backgroundColor: "primary.main",
                 minHeight: "100vh",
             }}
         >
@@ -31,13 +31,14 @@ function PlainLayout({ children, title }) {
                             sx={{
                                 minWidth: "40px",
                                 transform: "translateY(4px)",
+                                color: "crf.red",
                             }}
                         />
                         <Typography variant="h6">
                             <Link
                                 href="/"
-                                sx={{ textDecoration: "none" }}
-                                color="secondary"
+                                sx={{ textDecoration: "none", fontWeight: 300 }}
+                                color="#333"
                             >
                                 {config.name}
                             </Link>

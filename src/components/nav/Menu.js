@@ -53,7 +53,7 @@ function MenuItem(item) {
                 variant="inset"
                 component="li"
                 sx={{
-                    borderColor: "secondary.light",
+                    borderColor: "primary.light",
                     mx: 2,
                     mt: 2,
                     mb: 1,

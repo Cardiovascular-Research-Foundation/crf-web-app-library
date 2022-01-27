@@ -40,7 +40,7 @@ export default function UserMenu() {
     return (
         <>
             <Stack direction="row" alignItems="center" spacing={1}>
-                <Typography color="secondary.main">
+                <Typography color="primary.main">
                     {session.user.name}
                 </Typography>
                 <Tooltip title="User Menu">
@@ -54,7 +54,7 @@ export default function UserMenu() {
                     >
                         <AccountCircle
                             sx={{
-                                color: "secondary.main",
+                                color: "primary.main",
                                 width: "36px",
                                 height: "36px",
                             }}
@@ -83,7 +83,7 @@ export default function UserMenu() {
                     <ListItemIcon>
                         <AccountCircle
                             fontSize="small"
-                            sx={{ color: "secondary.main" }}
+                            sx={{ color: "primary.main" }}
                         />
                     </ListItemIcon>
                     Profile
@@ -92,7 +92,7 @@ export default function UserMenu() {
                     <ListItemIcon>
                         <Settings
                             fontSize="small"
-                            sx={{ color: "secondary.main" }}
+                            sx={{ color: "primary.main" }}
                         />
                     </ListItemIcon>
                     Settings
@@ -103,7 +103,7 @@ export default function UserMenu() {
                     <ListItemIcon>
                         <Logout
                             fontSize="small"
-                            sx={{ color: "secondary.main" }}
+                            sx={{ color: "primary.main" }}
                         />
                     </ListItemIcon>
                     Logout

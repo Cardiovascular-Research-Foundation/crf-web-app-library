@@ -3,17 +3,16 @@ import { blueGrey } from "@mui/material/colors"
 export default {
     palette: {
         primary: {
+            main: "#006eac",
+            light: "#2d8ec1",
+            bright: "#00fbfc",
+        },
+        secondary: {
             main: "#e92530",
             // light: string;
             // dark: string;
             // contrastText: string;
         },
-        secondary: {
-            main: "#006eac",
-            light: "#2d8ec1",
-            bright: "#00fbfc",
-        },
-        grey: {},
         menu: {
             bg: blueGrey[900],
             text: "#fff",
@@ -23,17 +22,25 @@ export default {
             bg: blueGrey[50],
             bgDark: "#006eac",
         },
+        crf: {
+            red: "#e92530",
+        },
+        special: {
+            crfLogo: "#e92530",
+        },
     },
     typography: {
         h1: {
             fontSize: 36,
-            fontWeight: 400,
+            fontWeight: 300,
         },
         h2: {
             fontSize: 32,
+            fontWeight: 300,
         },
         h3: {
             fontSize: 30,
+            fontWeight: 300,
         },
         h4: {
             fontSize: 26,

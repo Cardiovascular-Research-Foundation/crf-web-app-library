@@ -41,6 +41,7 @@ function StandardLayout({ children, menu, title }) {
                     sx={{
                         minWidth: "40px",
                         transform: "translateY(4px)",
+                        color: "special.crfLogo",
                     }}
                 />
                 <Typography lineHeight={1.2} fontSize={28} fontWeight={400}>
@@ -72,7 +73,7 @@ function StandardLayout({ children, menu, title }) {
                         onClick={handleDrawerToggle}
                         sx={{ mr: 2, display: { sm: "none" } }}
                     >
-                        <MenuIcon sx={{ color: "secondary.main" }} />
+                        <MenuIcon sx={{ color: "primary.main" }} />
                     </IconButton>
                     <Typography
                         variant="h6"
@@ -101,7 +102,7 @@ function StandardLayout({ children, menu, title }) {
                             "& .MuiDrawer-paper": {
                                 boxSizing: "border-box",
                                 width: drawerWidth,
-                                backgroundColor: "secondary.main",
+                                backgroundColor: "primary.main",
                             },
                         }}
                     >
@@ -114,7 +115,7 @@ function StandardLayout({ children, menu, title }) {
                             "& .MuiDrawer-paper": {
                                 boxSizing: "border-box",
                                 width: drawerWidth,
-                                backgroundColor: "secondary.main",
+                                backgroundColor: "primary.main",
                             },
                         }}
                         open
