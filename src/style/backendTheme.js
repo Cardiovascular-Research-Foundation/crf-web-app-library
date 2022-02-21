@@ -75,5 +75,38 @@ export default {
                 },
             },
         },
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "5px",
+                    "&:before, &:hover": {
+                        borderBottom: 0,
+                    },
+                },
+            },
+        },
+        MuiTextField: {
+            defaultProps: {
+                variant: "filled", // standard, filled, outlined
+            },
+            styleOverrides: {
+                root: {},
+            },
+        },
+        MuiFormControlLabel: {
+            styleOverrides: {
+                root: {
+                    marginLeft: 0,
+                    alignItems: "start",
+                },
+            },
+        },
+        MuiFormHelperText: {
+            styleOverrides: {
+                root: {
+                    marginLeft: 0,
+                },
+            },
+        },
     },
 }
