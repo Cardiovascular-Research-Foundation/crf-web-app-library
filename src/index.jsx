@@ -35,3 +35,11 @@ export { default as Spinner } from "./components/feedback/Spinner"
 // Graphics
 export { default as CrfHeart } from "./components/graphics/CrfHeart"
 export { default as CrfLogo } from "./components/graphics/CrfLogo"
+
+// Forms
+export { default as HideableField } from "./components/forms/HideableField"
+export { default as Datetime } from "./components/forms/fields/Datetime"
+export { default as MultiSelect } from "./components/forms/fields/MultiSelect"
+export { default as Switch } from "./components/forms/fields/Switch"
+export { default as TagsMuiSelect } from "./components/forms/fields/TagsMuiSelect"
+export { default as Text } from "./components/forms/fields/Text"
