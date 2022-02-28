@@ -1,4 +1,4 @@
-import { blueGrey } from "@mui/material/colors"
+import { blueGrey, grey } from "@mui/material/colors"
 
 export default {
     palette: {
@@ -43,7 +43,12 @@ export default {
             fontWeight: 300,
         },
         h4: {
-            fontSize: 26,
+            fontSize: 17,
+            fontWeight: 500,
+            marginTop: 25,
+            marginBottom: 8,
+            textTransform: "uppercase",
+            color: grey[700],
         },
         h5: {
             fontSize: 18,
@@ -97,7 +102,6 @@ export default {
             styleOverrides: {
                 root: {
                     marginLeft: 0,
-                    alignItems: "start",
                 },
             },
         },
