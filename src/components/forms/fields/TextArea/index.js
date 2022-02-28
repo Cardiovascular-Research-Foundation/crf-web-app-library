@@ -1,15 +1,16 @@
-import { TextField, InputAdornment } from "@mui/material"
+import { TextField } from "@mui/material"
 import { Controller } from "react-hook-form"
 
-export default function Text({ fieldData, control }) {
+export default function TextArea({ fieldData, control }) {
     return (
         <Controller
             name={fieldData.name}
             control={control}
             render={({ field: { onChange, value }, fieldState: { error } }) => {
-                // console.log(error)
                 return (
                     <TextField
+                        multiline
+                        rows={4}
                         required={!!fieldData.rules.required}
                         value={value}
                         label={fieldData.label}
