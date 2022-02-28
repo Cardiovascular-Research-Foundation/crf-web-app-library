@@ -2,6 +2,7 @@
 export { default as CenterLayout } from "./components/layouts/CenterLayout"
 export { default as PlainLayout } from "./components/layouts/PlainLayout"
 export { default as StandardLayout } from "./components/layouts/StandardLayout"
+export { default as TopMenuLayout } from "./components/layouts/TopMenuLayout"
 export { default as DocHead } from "./components/layouts/DocHead"
 
 // Structure
