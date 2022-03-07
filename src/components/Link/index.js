@@ -58,6 +58,10 @@ const Link = React.forwardRef(function Link(props, ref) {
     } = props
 
     const router = useRouter()
+
+    if (typeof href === "undefined") {
+        throw new Error("An href is required for the next/link component. The href is undefined on: " + props.children)
+    }
     const pathname = typeof href === "string" ? href : href.pathname
     const className = clsx(classNameProps, {
         [activeClassName]: router.pathname === pathname && activeClassName,
