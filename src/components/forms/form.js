@@ -12,7 +12,8 @@ import Switch from "./fields/Switch"
 import MultiSelect from "./fields/MultiSelect"
 import Text from "./fields/Text"
 import TextArea from "./fields/TextArea"
-import HideableField from "./HideableField"
+import ReadOnly from "./fields/ReadOnly"
+import HideableField from "./parts/HideableField"
 
 const formComponents = {
     datetime: Datetime,
@@ -22,6 +23,7 @@ const formComponents = {
     textarea: TextArea,
     radio: RadioButtons,
     radioGrid: RadioButtonsGrid,
+    readonly: ReadOnly,
 }
 
 export default function Form({ config, onSubmit }) {
@@ -37,7 +39,27 @@ export default function Form({ config, onSubmit }) {
 
         if (typeof field.rules !== "object") return false
 
-        let fieldSchema = Yup.string()
+        // set yup field schema type according to the field type
+        let fieldSchema
+        switch (field.type) {
+            case "datetime":
+                fieldSchema = Yup.date()
+                break
+            case "multiSelect":
+                fieldSchema = Yup.array()
+                break
+            case "switch":
+                fieldSchema = Yup.boolean()
+                break
+            case "radioGrid":
+                fieldSchema = Yup.object()
+                break
+            case "text":
+            case "textarea":
+            case "radio":
+            default:
+                fieldSchema = Yup.string()
+        }
 
         field.rules.forEach(rule => {
             switch (rule.type) {
@@ -82,13 +104,13 @@ export default function Form({ config, onSubmit }) {
     })
 
     useEffect(() => {
-        console.log(errors)
+        // console.log(errors)
     }, [errors])
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Stack spacing={2}>
+                <Stack spacing={2} sx={{ borderTop: "1px dashed #bbb", pt: "15px" }}>
                     {config.fields.map(field => {
                         if (field.show && formComponents.hasOwnProperty(field.type)) {
                             const Component = formComponents[field.type]

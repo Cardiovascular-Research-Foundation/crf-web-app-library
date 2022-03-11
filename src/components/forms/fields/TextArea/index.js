@@ -11,7 +11,7 @@ export default function TextArea({ fieldData, control }) {
                     <TextField
                         multiline
                         rows={4}
-                        required={!!fieldData.rules.required}
+                        required={!!fieldData.rules?.required}
                         value={value}
                         label={fieldData.label}
                         name={fieldData.name}

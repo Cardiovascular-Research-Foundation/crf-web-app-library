@@ -10,7 +10,7 @@ export default function Text({ fieldData, control }) {
                 // console.log(error)
                 return (
                     <TextField
-                        required={!!fieldData.rules.required}
+                        required={!!fieldData.rules?.required}
                         value={value}
                         label={fieldData.label}
                         name={fieldData.name}
