@@ -1,26 +1,23 @@
-import { Box, CircularProgress, Typography } from "@mui/material"
+import { Stack, CircularProgress, Typography } from "@mui/material"
 
 const Spinner = ({ label, position = "center", color = "primary" }) => {
-    const resolvedColor =
-        color[0] === "#" ? { sx: { color: color } } : { color }
+    const resolvedColor = color[0] === "#" ? { sx: { color: color } } : { color }
 
     return (
-        <Box
+        <Stack
+            direction="column"
+            alignItems={position}
             sx={{
-                display: "flex",
-                direction: "column",
-                justifyContent: position,
+                py: "45px",
             }}
         >
-            <Box>
-                <CircularProgress {...resolvedColor} />
-            </Box>
+            <CircularProgress {...resolvedColor} />
             {label && (
-                <Typography variant="body1" component="div">
+                <Typography variant="body1" component="div" mt={2}>
                     {label}
                 </Typography>
             )}
-        </Box>
+        </Stack>
     )
 }
 
