@@ -1,20 +1,11 @@
 import { useState } from "react"
 import Link from "../Link"
 import { useSession, signOut, signIn } from "next-auth/react"
-import {
-    Stack,
-    Menu,
-    MenuItem,
-    ListItemIcon,
-    Tooltip,
-    Typography,
-    IconButton,
-    Button,
-} from "@mui/material"
+import { Stack, Menu, MenuItem, ListItemIcon, Tooltip, Typography, IconButton, Button } from "@mui/material"
 import { AccountCircle, Settings, Logout } from "@mui/icons-material"
 import { useAppConfig } from "../providers/AppConfigProvider"
 
-export default function UserMenu() {
+export default function UserMenu({ variant = "dark" }) {
     const [anchorElUser, setAnchorElUser] = useState(null)
     const { data: session } = useSession()
     const { config } = useAppConfig()
@@ -26,12 +17,18 @@ export default function UserMenu() {
         setAnchorElUser(null)
     }
 
+    const variantStyles = {
+        dark: {
+            color: "#fff",
+        },
+        light: {
+            color: "#000",
+        },
+    }
+
     if (!session) {
         return (
-            <Button
-                variant="contained"
-                onClick={() => signIn(config.authProvider || "okta")}
-            >
+            <Button variant="contained" onClick={() => signIn(config.authProvider || "okta")}>
                 Login
             </Button>
         )
@@ -40,9 +37,7 @@ export default function UserMenu() {
     return (
         <>
             <Stack direction="row" alignItems="center" spacing={1}>
-                <Typography color="primary.main">
-                    {session.user.name}
-                </Typography>
+                <Typography color={variantStyles[variant].color}>{session.user.name}</Typography>
                 <Tooltip title="User Menu">
                     <IconButton
                         aria-label="User Menu"
@@ -54,7 +49,7 @@ export default function UserMenu() {
                     >
                         <AccountCircle
                             sx={{
-                                color: "primary.main",
+                                color: variantStyles[variant].color,
                                 width: "36px",
                                 height: "36px",
                             }}
@@ -81,30 +76,19 @@ export default function UserMenu() {
             >
                 <MenuItem component={Link} href="/user/profile">
                     <ListItemIcon>
-                        <AccountCircle
-                            fontSize="small"
-                            sx={{ color: "primary.main" }}
-                        />
+                        <AccountCircle fontSize="small" sx={{ color: "primary.main" }} />
                     </ListItemIcon>
                     Profile
                 </MenuItem>
                 <MenuItem component={Link} href="/user/settings">
                     <ListItemIcon>
-                        <Settings
-                            fontSize="small"
-                            sx={{ color: "primary.main" }}
-                        />
+                        <Settings fontSize="small" sx={{ color: "primary.main" }} />
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem
-                    onClick={() => signOut({ callbackUrl: "/auth/signin" })}
-                >
+                <MenuItem onClick={() => signOut({ callbackUrl: "/auth/signin" })}>
                     <ListItemIcon>
-                        <Logout
-                            fontSize="small"
-                            sx={{ color: "primary.main" }}
-                        />
+                        <Logout fontSize="small" sx={{ color: "primary.main" }} />
                     </ListItemIcon>
                     Logout
                 </MenuItem>
