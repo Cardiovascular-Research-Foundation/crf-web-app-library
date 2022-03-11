@@ -4,6 +4,7 @@ import { Button, Box, Typography, Stack } from "@mui/material"
 
 import CenterLayout from "../layouts/CenterLayout"
 import { useAppConfig } from "../providers/AppConfigProvider"
+import CrfHeart from "../graphics/CrfHeart"
 
 export default function SignIn({ providers }) {
     const router = useRouter()
@@ -11,8 +12,26 @@ export default function SignIn({ providers }) {
 
     return (
         <CenterLayout>
-            <Stack justifyContent="center" alignItems="center" spacing={5}>
-                <Typography variant="h1" color="#fff">
+            <Stack
+                justifyContent="center"
+                alignItems="center"
+                spacing={5}
+                sx={{
+                    maxWidth: "100%",
+                    p: "160px 100px",
+                    border: "1px solid #fff",
+                    borderRadius: "10px",
+                    m: "20px",
+                }}
+            >
+                <CrfHeart
+                    sx={{
+                        color: "#fff",
+                        width: "100px",
+                        height: "100px",
+                    }}
+                />
+                <Typography variant="h1" color="#fff" textAlign="center">
                     {config.name}
                 </Typography>
                 <Box>
@@ -31,8 +50,7 @@ export default function SignIn({ providers }) {
                                 }}
                                 onClick={() =>
                                     signIn(provider.id, {
-                                        callbackUrl:
-                                            router.query.callbackUrl || "/",
+                                        callbackUrl: router.query.callbackUrl || "/",
                                     })
                                 }
                             >
