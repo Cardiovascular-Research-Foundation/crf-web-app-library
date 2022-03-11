@@ -86,7 +86,7 @@ export default function UserMenu({ variant = "dark" }) {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={() => signOut({ callbackUrl: "/auth/signin" })}>
+                <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
                     <ListItemIcon>
                         <Logout fontSize="small" sx={{ color: "primary.main" }} />
                     </ListItemIcon>
