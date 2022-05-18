@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "../Link"
 import { useSession, signOut, signIn } from "next-auth/react"
 import { Stack, Menu, MenuItem, ListItemIcon, Tooltip, Typography, IconButton, Button } from "@mui/material"
@@ -9,6 +9,12 @@ export default function UserMenu({ variant = "dark" }) {
     const [anchorElUser, setAnchorElUser] = useState(null)
     const { data: session } = useSession()
     const { config } = useAppConfig()
+
+    useEffect(() => {
+        if (session) {
+            console.log({ session })
+        }
+    }, [session])
 
     const handleOpenUserMenu = event => {
         setAnchorElUser(event.currentTarget)
@@ -28,7 +34,18 @@ export default function UserMenu({ variant = "dark" }) {
 
     if (!session) {
         return (
-            <Button variant="contained" onClick={() => signIn(config.authProvider || "okta")}>
+            <Button
+                variant="outlined"
+                sx={{
+                    color: "white",
+                    borderColor: "white",
+                    "&:hover": {
+                        borderColor: "white",
+                        backgroundColor: "primary.dark",
+                    },
+                }}
+                onClick={() => signIn(config.authProvider || "okta")}
+            >
                 Login
             </Button>
         )

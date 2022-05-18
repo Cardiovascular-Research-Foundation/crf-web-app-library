@@ -64,11 +64,7 @@ function MenuItem(item) {
 
     return (
         <>
-            <ListItem
-                component="li"
-                disablePadding
-                onClick={item.action || null}
-            >
+            <ListItem component="li" disablePadding onClick={item.action || null}>
                 <Link href={item.path || ""} passHref>
                     <ListItemButton
                         component={item.path && "a"}
@@ -77,7 +73,7 @@ function MenuItem(item) {
                         selected={router.asPath === item.path}
                         sx={{
                             "&:hover, &.Mui-selected": {
-                                backgroundColor: "rgba(0, 0, 0, 0.12)",
+                                backgroundColor: "rgba(0, 0, 0, 0.3)",
                             },
                         }}
                     >
@@ -99,23 +95,16 @@ function MenuItem(item) {
                             primary={item.label}
                             primaryTypographyProps={{
                                 fontSize: 14,
-                                fontWeight: "medium",
+                                fontWeight: "bold",
                                 letterSpacing: 0,
                                 color: "menu.text",
                             }}
                             sx={{
                                 opacity: 1,
-                                paddingLeft: item.icon
-                                    ? "0"
-                                    : 32 + item.level * 15 + "px",
+                                paddingLeft: item.icon ? "0" : 32 + item.level * 15 + "px",
                             }}
                         />
-                        {item.isExternal ? (
-                            <OpenInNew
-                                sx={{ color: "white" }}
-                                fontSize="small"
-                            />
-                        ) : null}
+                        {item.isExternal ? <OpenInNew sx={{ color: "white" }} fontSize="small" /> : null}
                         {item.submenu ? (
                             open ? (
                                 <ExpandLess sx={{ color: "white" }} />
@@ -130,11 +119,7 @@ function MenuItem(item) {
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div">
                         {item.submenu.map((child, j) => (
-                            <MenuItem
-                                {...child}
-                                key={child.path || j}
-                                level={item.level + 1}
-                            />
+                            <MenuItem {...child} key={child.path || j} level={item.level + 1} />
                         ))}
                     </List>
                 </Collapse>

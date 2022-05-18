@@ -35,7 +35,7 @@ export default {
         fontFamily: "canada-type-gibson, sans-serif", // Roboto
         h1: {
             fontSize: 36,
-            fontWeight: 300,
+            fontWeight: 600,
         },
         h2: {
             fontSize: 32,

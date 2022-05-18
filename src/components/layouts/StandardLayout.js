@@ -1,16 +1,7 @@
 import { useState } from "react"
 import { useSession } from "next-auth/react"
 import { useMediaQuery } from "@mui/material"
-import {
-    Box,
-    AppBar,
-    Toolbar,
-    Divider,
-    Drawer,
-    IconButton,
-    Typography,
-    Stack,
-} from "@mui/material"
+import { Box, AppBar, Toolbar, Divider, Drawer, IconButton, Typography, Stack } from "@mui/material"
 import { Menu as MenuIcon } from "@mui/icons-material"
 
 import { useAppConfig } from "../providers/AppConfigProvider"
@@ -43,7 +34,7 @@ function StandardLayout({ children, menu, title }) {
                         color: "special.crfLogo",
                     }}
                 />
-                <Typography lineHeight={1.2} fontSize={28} fontWeight={400}>
+                <Typography fontSize={18} fontWeight={400}>
                     <Link href="/" color="#fff" sx={{ textDecoration: "none" }}>
                         {config.name}
                     </Link>
@@ -74,21 +65,15 @@ function StandardLayout({ children, menu, title }) {
                     >
                         <MenuIcon sx={{ color: "primary.main" }} />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ flexGrow: 1 }}
-                    ></Typography>
+                    <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+                        {" "}
+                    </Typography>
                     <Box sx={{ flexGrow: 0 }}>
-                        <UserMenu />
+                        <UserMenu variant="light" />
                     </Box>
                 </Toolbar>
             </AppBar>
-            <Box
-                component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-            >
+            <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
                 {isMobile ? (
                     <Drawer
                         variant="temporary"

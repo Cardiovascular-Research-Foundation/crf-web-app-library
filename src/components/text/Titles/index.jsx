@@ -23,7 +23,7 @@ const SectionTitle = ({ children, ...rest }) => {
 
 const PageTitle = ({ children, ...rest }) => {
     return (
-        <Typography variant="h1" mb={2} color="primary.main" {...rest}>
+        <Typography variant="h1" mb={2} color="primary.main" sx={{ fontSize: "24px!important" }} {...rest}>
             {children}
         </Typography>
     )
