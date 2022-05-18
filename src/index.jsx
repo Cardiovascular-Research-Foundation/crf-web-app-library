@@ -7,6 +7,7 @@ export { default as DocHead } from "./components/layouts/DocHead"
 
 // Structure
 export { default as Section } from "./components/structure/Section"
+export { default as InfoPanel } from "./components/structure/InfoPanel"
 
 // Pages
 export { default as Standard404 } from "./components/pages/Standard404"
