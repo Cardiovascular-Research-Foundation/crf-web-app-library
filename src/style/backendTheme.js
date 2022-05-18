@@ -66,6 +66,16 @@ export default {
             fontStyle: "italic",
         },
     },
+    forms: {
+        style: {
+            Form: {
+                borderTop: "1px solid #e92530",
+            },
+            FormControlWrapper: {
+                borderBottom: "1px dashed #bbb",
+            },
+        },
+    },
     components: {
         MuiContainer: {
             defaultProps: {
@@ -111,10 +121,17 @@ export default {
         },
         MuiTextField: {
             defaultProps: {
-                variant: "filled", // standard, filled, outlined
+                variant: "outlined", // standard, filled, outlined
             },
             styleOverrides: {
                 root: {},
+            },
+        },
+        MuiFormControl: {
+            styleOverrides: {
+                root: {
+                    marginTop: "30px",
+                },
             },
         },
         MuiFormControlLabel: {
@@ -122,6 +139,11 @@ export default {
                 root: {
                     marginLeft: 0,
                 },
+            },
+        },
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {},
             },
         },
         MuiFormHelperText: {
@@ -147,6 +169,22 @@ export default {
                     height: "20px",
                 },
             },
+        },
+        MuiTable: {
+            variants: [
+                {
+                    props: { variant: "index" },
+                    style: {
+                        ".MuiTableCell-root": {
+                            fontSize: 14,
+                            fontWeight: 400,
+                        },
+                        ".MuiTableCell-head": {
+                            fontWeight: 600,
+                        },
+                    },
+                },
+            ],
         },
     },
 }

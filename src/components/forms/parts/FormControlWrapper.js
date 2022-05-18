@@ -3,12 +3,12 @@ import { styled } from "@mui/material/styles"
 
 export default function FormControlWrapper({ children, ...rest }) {
     const FormControlStyledComponent = styled(FormControl)(({ theme }) => ({
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             flexDirection: "row",
         },
         paddingTop: "5px",
         paddingBottom: "20px",
-        borderBottom: "1px dashed #bbb",
+        ...theme.forms.style.FormControlWrapper,
     }))
 
     return <FormControlStyledComponent {...rest}>{children}</FormControlStyledComponent>

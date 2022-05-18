@@ -30,6 +30,8 @@ export default function Form({ config, onSubmit }) {
     const schemaObject = {},
         defaultValues = {}
 
+    console.log({ config })
+
     config.fields.forEach(field => {
         // skip fields that are not in the formComponents
         if (!formComponents[field.type]) return
@@ -110,7 +112,7 @@ export default function Form({ config, onSubmit }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Stack spacing={2} sx={{ borderTop: "1px dashed #bbb", pt: "15px" }}>
+                <Stack spacing={2} sx={{ borderTop: "0 dashed #bbb", pt: "15px" }}>
                     {config.fields.map(field => {
                         if (field.show && formComponents.hasOwnProperty(field.type)) {
                             const Component = formComponents[field.type]

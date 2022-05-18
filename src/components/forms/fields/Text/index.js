@@ -1,4 +1,4 @@
-import { TextField, InputAdornment } from "@mui/material"
+import { TextField } from "@mui/material"
 import { Controller } from "react-hook-form"
 
 export default function Text({ fieldData, control }) {

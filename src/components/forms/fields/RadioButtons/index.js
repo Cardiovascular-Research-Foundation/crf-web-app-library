@@ -1,4 +1,4 @@
-import { RadioGroup, Radio, FormLabel, FormControl, FormControlLabel, FormHelperText } from "@mui/material"
+import { RadioGroup, Radio, FormLabel, FormControlLabel, FormHelperText } from "@mui/material"
 import { Controller } from "react-hook-form"
 import FormControlWrapper from "../../parts/FormControlWrapper"
 import FieldLabelWrapper from "../../parts/FieldLabelWrapper"
@@ -13,7 +13,7 @@ export default function RadioButtons({ fieldData, control }) {
                 return (
                     <FormControlWrapper error={!!error}>
                         <FieldLabelWrapper>
-                            <FormLabel>{fieldData.label}</FormLabel>
+                            <FormLabel sx={{ fontWeight: 600 }}>{fieldData.label}</FormLabel>
                             {fieldData.description && <FormHelperText>{fieldData.description}</FormHelperText>}
                             {fieldData.feedback}
                             {error && <FormHelperText>{error.message}</FormHelperText>}
