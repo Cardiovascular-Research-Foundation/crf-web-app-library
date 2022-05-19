@@ -1,10 +1,9 @@
-import {useSession} from "next-auth/react";
+import { useSession } from "next-auth/react"
 
-export default function Guard({children}) {
-
+export default function Guard({ children }) {
     const { data: session } = useSession()
 
-    if (!session) return false
+    if (!session) return null
 
     return children
 }

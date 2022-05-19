@@ -29,7 +29,7 @@ function MenuItem(item) {
     const { data: session } = useSession()
     const router = useRouter()
 
-    if (item.access && !session) return false
+    if (item.access && !session) return null
 
     if (item.type === "header") {
         return (
