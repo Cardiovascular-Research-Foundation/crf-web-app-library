@@ -1,15 +1,23 @@
-import { RadioGroup, Radio, FormLabel, FormControlLabel, FormHelperText } from "@mui/material"
+import { Checkbox, FormLabel, FormGroup, FormControlLabel, FormHelperText } from "@mui/material"
 import { Controller } from "react-hook-form"
 import FormControlWrapper from "../../parts/FormControlWrapper"
 import FieldLabelWrapper from "../../parts/FieldLabelWrapper"
 import FieldWrapper from "../../parts/FieldWrapper"
 
-export default function RadioButtons({ fieldData, control }) {
+export default function CheckboxField({ fieldData, control }) {
     return (
         <Controller
             name={fieldData.name}
             control={control}
             render={({ field, fieldState: { error } }) => {
+                const updateValue = optionValue => {
+                    if (field.value.includes(optionValue)) {
+                        field.value = field.value.filter(val => val !== optionValue)
+                    } else {
+                        field.value.push(optionValue)
+                    }
+                    field.onChange(field.value)
+                }
                 return (
                     <FormControlWrapper error={!!error}>
                         <FieldLabelWrapper>
@@ -19,24 +27,20 @@ export default function RadioButtons({ fieldData, control }) {
                             {error && <FormHelperText>{error.message}</FormHelperText>}
                         </FieldLabelWrapper>
                         <FieldWrapper>
-                            <RadioGroup
-                                row={fieldData.params?.inline ? true : null}
-                                column={fieldData.params?.inline ? null : true}
-                                name={fieldData.name}
-                            >
+                            <FormGroup name={fieldData.name}>
                                 {fieldData.options.map((option, index) => {
                                     return (
                                         <FormControlLabel
                                             key={index}
                                             value={option.value}
-                                            control={<Radio />}
+                                            control={<Checkbox />}
                                             label={option.label}
-                                            onChange={field.onChange}
-                                            checked={field.value === option.value}
+                                            onChange={e => updateValue(option.value)}
+                                            checked={field.value.includes(option.value)}
                                         />
                                     )
                                 })}
-                            </RadioGroup>
+                            </FormGroup>
                         </FieldWrapper>
                     </FormControlWrapper>
                 )

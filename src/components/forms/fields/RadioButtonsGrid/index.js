@@ -14,7 +14,9 @@ import { Controller } from "react-hook-form"
 export default function RadioButtonsGrid({ fieldData, control }) {
     const ratingLabels = ["Excellent", "Very Good", "Good", "Fair", "Poor"]
 
-    console.log(fieldData)
+    // console.log(fieldData)
+
+    // TODO: use dropdowns in mobile
 
     return (
         <Controller
@@ -27,8 +29,17 @@ export default function RadioButtonsGrid({ fieldData, control }) {
                 }
 
                 return (
-                    <Box sx={{ borderBottom: "1px dashed #bbb", pt: "20px", pb: "20px" }}>
-                        <FormLabel sx={{ fontWeight: 600, mb: "20px", display: "block" }}>{fieldData.label}</FormLabel>
+                    // <Box sx={{ borderBottom: "1px dashed #bbb", pt: "20px", pb: "20px" }}>
+                    <Box sx={{ pt: "20px", pb: "20px" }}>
+                        <FormLabel
+                            sx={{
+                                fontWeight: 600,
+                                mb: "20px",
+                                display: "block",
+                            }}
+                        >
+                            {fieldData.label}
+                        </FormLabel>
                         <Typography maxWidth="750px" mb={2}>
                             To evaluate the speakers, please check the answer that best represents your level of
                             agreement is a speaker was 'Qualified, knowledgeable, organized, and effective' in their

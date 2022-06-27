@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material"
 
-export default function FieldWrapper({ children }) {
+export default function FieldWrapper({ children, ...rest }) {
     return (
-        <Grid item md={9}>
+        <Grid item {...rest}>
             {children}
         </Grid>
     )

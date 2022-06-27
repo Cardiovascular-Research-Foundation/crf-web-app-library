@@ -12,8 +12,13 @@ export default function HideableField({ control, fieldData, children }) {
     const [show, setShow] = useState(true)
 
     useEffect(() => {
-        if (fieldData.params.hide_on.value) {
-            setShow(watchedFieldValue !== fieldData.params.hide_on.value)
+        const hideValue = fieldData.params.hide_on.value
+        if (hideValue) {
+            if (typeof hideValue === "object") {
+                setShow(!hideValue.includes(watchedFieldValue))
+            } else {
+                setShow(watchedFieldValue !== hideValue)
+            }
         } else {
             // handle falsy value
             setShow(!!watchedFieldValue)
