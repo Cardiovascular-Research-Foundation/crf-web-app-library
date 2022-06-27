@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Stack } from "@mui/material"
 import Link from "../Link"
+import { ExpandLess, ExpandMore } from "@mui/icons-material"
 
 export default function TopMenu({ menu }) {
     const [items, setItems] = useState([])
@@ -23,13 +24,20 @@ export default function TopMenu({ menu }) {
                     sx={{
                         textDecoration: "none",
                         fontWeight: 300,
-                        color: "#000",
+                        color: "#fff",
                         "&:hover": {
                             textDecoration: "underline",
                         },
                     }}
                 >
                     {item.label}
+                    {item.submenu ? (
+                        open ? (
+                            <ExpandLess sx={{ color: "white" }} />
+                        ) : (
+                            <ExpandMore sx={{ color: "white" }} />
+                        )
+                    ) : null}
                 </Link>
             ))}
         </Stack>
