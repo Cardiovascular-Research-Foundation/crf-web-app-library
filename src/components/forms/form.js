@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
 import AdapterDateFns from "@mui/lab/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import { Stack, Button } from "@mui/material"
+
 import Checkbox from "./fields/Checkbox"
 import Datetime from "./fields/Datetime"
 import Divider from "./fields/Divider"
@@ -19,8 +20,16 @@ import TextArea from "./fields/TextArea"
 import ReadOnly from "./fields/ReadOnly"
 import Slider from "./fields/Slider"
 import StarRating from "./fields/StarRating"
+
 import HideableField from "./parts/HideableField"
 import WatchableField from "./parts/WatchableField"
+
+// TODO: would this work here?
+// import dynamic from "next/dynamic";
+// const formComponents = {
+//     text: dynamic(() => import("./fields/Text")),
+//     textarea: dynamic(() => import("./fields/TextArea")),
+// }
 
 const formComponents = {
     checkbox: Checkbox,
