@@ -44,7 +44,7 @@ export default {
         h3: {
             fontSize: 24,
             fontWeight: 300,
-            color: palette.primary.main,
+            // color: palette.primary.main,
         },
         h4: {
             fontSize: 17,
@@ -52,7 +52,7 @@ export default {
             marginTop: 25,
             marginBottom: 8,
             textTransform: "uppercase",
-            color: palette.primary.main,
+            // color: palette.primary.main,
         },
         h5: {
             fontSize: 18,
@@ -69,10 +69,14 @@ export default {
     forms: {
         style: {
             Form: {
-                borderTop: "1px solid #e92530",
+                // borderTop: "1px solid #e92530",
             },
             FormControlWrapper: {
-                borderBottom: "1px dashed #bbb",
+                // borderBottom: "1px dashed #bbb",
+                // "&:last-of-type": {
+                //     borderBottom: "none",
+                //     paddingBottom: 0,
+                // },
             },
         },
     },
@@ -130,7 +134,11 @@ export default {
         MuiFormControl: {
             styleOverrides: {
                 root: {
-                    marginTop: "30px",
+                    marginTop: "10px",
+                    "&:first-of-type": {
+                        marginTop: 0,
+                    },
+                    paddingBottom: "5px!important",
                 },
             },
         },
@@ -139,11 +147,25 @@ export default {
                 root: {
                     marginLeft: 0,
                 },
+                label: {
+                    fontSize: "0.9rem",
+                },
             },
         },
         MuiFormLabel: {
             styleOverrides: {
-                root: {},
+                root: {
+                    fontWeight: 500,
+                    color: palette.primary.main,
+                },
+            },
+        },
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    fontWeight: 400,
+                    color: palette.primary.main,
+                },
             },
         },
         MuiFormHelperText: {
@@ -167,6 +189,19 @@ export default {
                 root: {
                     width: "20px",
                     height: "20px",
+                },
+            },
+        },
+        MuiSlider: {
+            styleOverrides: {
+                mark: {
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "20px",
+                    // backgroundColor: palette.primary.main,
+                    "&.MuiSlider-markActive": {
+                        backgroundColor: palette.primary.main,
+                    },
                 },
             },
         },
