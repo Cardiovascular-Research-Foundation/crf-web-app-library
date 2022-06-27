@@ -2,15 +2,22 @@ import { Box, Stack, AppBar, Container, Toolbar, Typography } from "@mui/materia
 import UserMenu from "../nav/UserMenu"
 import { useAppConfig } from "../providers/AppConfigProvider"
 import CrfHeart from "../graphics/CrfHeart"
-import TopMenu from "../nav/TopMenu"
+import TopMenu from "../nav/TopMenu2"
 import Link from "../Link"
 import DocHead from "./DocHead"
 
-function TopMenuLayout({ children, title }) {
+function TopMenuLayout({ children, title, fullWidth = false }) {
     const { config } = useAppConfig()
 
     return (
-        <Box sx={{ minHeight: "100vh", pb: "80px" }}>
+        <Box
+            sx={{
+                minHeight: "100vh",
+                pb: "80px",
+                backgroundImage: "url(/media/background_facets.png)",
+                backgroundSize: "cover",
+            }}
+        >
             <DocHead title={title} />
             {/*<Box*/}
             {/*    sx={{*/}
@@ -29,7 +36,7 @@ function TopMenuLayout({ children, title }) {
                 position="relative"
                 sx={{
                     py: "10px",
-                    bgcolor: "primary.main",
+                    bgcolor: "#fff",
                     // background:
                     //     "linear-gradient(196deg, rgba(0,212,255,1), rgba(31,3,206,1) 25%, rgba(9,9,121,1) 76%, rgba(2,0,36,1) 0% 100%);",
                 }}
@@ -41,13 +48,20 @@ function TopMenuLayout({ children, title }) {
                                 fontSize="medium"
                                 sx={{
                                     minWidth: "40px",
-                                    color: "#fff",
+                                    color: "crf.red",
                                     // transform: "translateY(4px)",
                                 }}
                             />
                             <Box>
                                 <Typography variant="h6">
-                                    <Link href="/" sx={{ textDecoration: "none", fontWeight: 300, color: "#fff" }}>
+                                    <Link
+                                        href="/"
+                                        sx={{
+                                            textDecoration: "none",
+                                            fontWeight: 300,
+                                            color: "#666",
+                                        }}
+                                    >
                                         {config.name}
                                     </Link>
                                 </Typography>
@@ -62,12 +76,18 @@ function TopMenuLayout({ children, title }) {
                     </Stack>
                 </Container>
             </AppBar>
-            <Toolbar sx={{ mb: "50px", borderBottom: "1px dashed #bbb" }}>
+            <Toolbar
+                sx={{
+                    mb: "50px",
+                    borderBottom: "1px dashed #bbb",
+                    bgcolor: "primary.main",
+                }}
+            >
                 <Container>
                     <TopMenu menu={config.menu} />
                 </Container>
             </Toolbar>
-            <Container>{children}</Container>
+            <Container sx={{ maxWidth: fullWidth ? "100%" : null }}>{children}</Container>
         </Box>
     )
 }
