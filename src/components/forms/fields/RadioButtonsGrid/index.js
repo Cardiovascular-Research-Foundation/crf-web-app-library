@@ -6,17 +6,20 @@ import {
     FormControl,
     FormLabel,
     FormControlLabel,
-    FormHelperText,
     Typography,
+    Select,
+    MenuItem,
+    InputLabel,
+    useMediaQuery,
 } from "@mui/material"
 import { Controller } from "react-hook-form"
 
 export default function RadioButtonsGrid({ fieldData, control }) {
+    const isMobile = useMediaQuery("(max-width:700px)")
+    // const isMobile = true
     const ratingLabels = ["Excellent", "Very Good", "Good", "Fair", "Poor"]
 
     // console.log(fieldData)
-
-    // TODO: use dropdowns in mobile
 
     return (
         <Controller
@@ -46,37 +49,40 @@ export default function RadioButtonsGrid({ fieldData, control }) {
                             teaching method.
                         </Typography>
                         <Stack>
-                            <Stack direction="row" sx={{ alignItems: "center", width: "660px" }}>
-                                <Box sx={{ flexGrow: 1 }} />
-                                <Stack direction="row" sx={{ width: "380px" }}>
-                                    {ratingLabels.map((label, idx) => {
-                                        return (
-                                            <Box
-                                                key={idx}
-                                                sx={{
-                                                    flex: "1 1 0px",
-                                                    fontSize: "14px",
-                                                    fontWeight: 600,
-                                                    textAlign: "center",
-                                                    py: "10px",
-                                                }}
-                                            >
-                                                {label}
-                                            </Box>
-                                        )
-                                    })}
+                            {!isMobile && (
+                                <Stack direction="row" sx={{ alignItems: "center", width: "660px" }}>
+                                    <Box sx={{ flexGrow: 1 }} />
+                                    <Stack direction="row" sx={{ width: "380px" }}>
+                                        {ratingLabels.map((label, idx) => {
+                                            return (
+                                                <Box
+                                                    key={idx}
+                                                    sx={{
+                                                        flex: "1 1 0px",
+                                                        fontSize: "14px",
+                                                        fontWeight: 600,
+                                                        textAlign: "center",
+                                                        py: "10px",
+                                                    }}
+                                                >
+                                                    {label}
+                                                </Box>
+                                            )
+                                        })}
+                                    </Stack>
                                 </Stack>
-                            </Stack>
+                            )}
                             {fieldData.subFields.map((question, questionIndex) => {
                                 return (
                                     <FormControl
                                         key={questionIndex}
                                         required={true}
                                         sx={{
-                                            display: "flex",
                                             flexDirection: "row",
+                                            justifyContent: isMobile ? "space-between" : null,
                                             alignItems: "center",
-                                            width: "660px",
+                                            width: isMobile ? "100%" : "660px",
+                                            maxWidth: isMobile ? "380px" : null,
                                             // bgcolor: questionIndex % 2 === 0 ? "#e3e3e3" : null,
                                             "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.04)" },
                                         }}
@@ -84,38 +90,58 @@ export default function RadioButtonsGrid({ fieldData, control }) {
                                         <FormLabel
                                             id="demo-row-radio-buttons-group-label"
                                             sx={{
-                                                flexGrow: 1,
+                                                flexGrow: isMobile ? null : 1,
                                                 lineHeight: 1,
                                                 pl: null,
                                             }}
                                         >
                                             {question.label}
                                         </FormLabel>
-                                        <RadioGroup
-                                            row
-                                            aria-labelledby="demo-row-radio-buttons-group-label"
-                                            name="row-radio-buttons-group"
-                                            sx={{ width: "380px" }}
-                                        >
-                                            {question.options.map((option, optionIndex) => {
-                                                // maybe can use question.value instead of value[question.id] for checked?
-                                                return (
-                                                    <FormControlLabel
-                                                        key={optionIndex}
-                                                        value={option.value}
-                                                        control={<Radio />}
-                                                        label=""
-                                                        onChange={e => updateValue(e, question.id)}
-                                                        checked={value[question.id] === option.value}
-                                                        sx={{
-                                                            width: "20%",
-                                                            justifyContent: "center",
-                                                            marginRight: 0,
-                                                        }}
-                                                    />
-                                                )
-                                            })}
-                                        </RadioGroup>
+                                        {isMobile ? (
+                                            <FormControl sx={{ width: "160px" }}>
+                                                <InputLabel id={`${question.id}-${questionIndex}`}>Rating</InputLabel>
+                                                <Select
+                                                    labelId={`${question.id}-${questionIndex}`}
+                                                    value={value[question.id]}
+                                                    label="Rating"
+                                                    onChange={e => updateValue(e, question.id)}
+                                                >
+                                                    {question.options.map((option, optionIndex) => {
+                                                        return (
+                                                            <MenuItem key={optionIndex} value={option.value}>
+                                                                {ratingLabels[optionIndex]}
+                                                            </MenuItem>
+                                                        )
+                                                    })}
+                                                </Select>
+                                            </FormControl>
+                                        ) : (
+                                            <RadioGroup
+                                                row
+                                                aria-labelledby="demo-row-radio-buttons-group-label"
+                                                name="row-radio-buttons-group"
+                                                sx={{ width: "380px" }}
+                                            >
+                                                {question.options.map((option, optionIndex) => {
+                                                    // maybe can use question.value instead of value[question.id] for checked?
+                                                    return (
+                                                        <FormControlLabel
+                                                            key={optionIndex}
+                                                            value={option.value}
+                                                            control={<Radio />}
+                                                            label=""
+                                                            onChange={e => updateValue(e, question.id)}
+                                                            checked={value[question.id] === option.value}
+                                                            sx={{
+                                                                width: "20%",
+                                                                justifyContent: "center",
+                                                                marginRight: 0,
+                                                            }}
+                                                        />
+                                                    )
+                                                })}
+                                            </RadioGroup>
+                                        )}
                                     </FormControl>
                                 )
                             })}
