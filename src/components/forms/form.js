@@ -6,6 +6,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns"
 import LocalizationProvider from "@mui/lab/LocalizationProvider"
 import { Stack, Button } from "@mui/material"
 
+import ButtonField from "./fields/Button"
 import Checkbox from "./fields/Checkbox"
 import Datetime from "./fields/Datetime"
 import Divider from "./fields/Divider"
@@ -32,6 +33,7 @@ import WatchableField from "./parts/WatchableField"
 // }
 
 const formComponents = {
+    button: ButtonField,
     checkbox: Checkbox,
     datetime: Datetime,
     divider: Divider,
@@ -48,7 +50,7 @@ const formComponents = {
     starRating: StarRating,
 }
 
-export default function Form({ config, onSubmit, onFieldUpdated }) {
+export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
     const schemaObject = {},
         defaultValues = {}
     // console.log({ config })
@@ -130,6 +132,8 @@ export default function Form({ config, onSubmit, onFieldUpdated }) {
         handleSubmit, // only called after validation passes
         control,
         formState,
+        setValue,
+        trigger,
     } = useForm({
         resolver: yupResolver(validationSchema),
         defaultValues: defaultValues,
@@ -146,6 +150,13 @@ export default function Form({ config, onSubmit, onFieldUpdated }) {
                     {config.fields.map(field => {
                         if (field.show && formComponents.hasOwnProperty(field.type)) {
                             const Component = formComponents[field.type]
+                            const fieldProps = {
+                                key: field.id,
+                                fieldData: field,
+                                control: control,
+                                actions: actions,
+                                form: { setValue, trigger },
+                            }
 
                             // TODO: refactor these wrapping components (behaviors?)
                             if (field.params?.hide_on) {
@@ -158,14 +169,14 @@ export default function Form({ config, onSubmit, onFieldUpdated }) {
                                                 control={control}
                                                 onFieldUpdated={onFieldUpdated}
                                             >
-                                                <Component fieldData={field} control={control} />
+                                                <Component {...fieldProps} />
                                             </WatchableField>
                                         </HideableField>
                                     )
                                 }
                                 return (
                                     <HideableField key={field.id} fieldData={field} control={control}>
-                                        <Component fieldData={field} control={control} />
+                                        <Component {...fieldProps} />
                                     </HideableField>
                                 )
                             }
@@ -178,12 +189,12 @@ export default function Form({ config, onSubmit, onFieldUpdated }) {
                                         control={control}
                                         onFieldUpdated={onFieldUpdated}
                                     >
-                                        <Component fieldData={field} control={control} />
+                                        <Component {...fieldProps} />
                                     </WatchableField>
                                 )
                             }
 
-                            return <Component key={field.id} fieldData={field} control={control} />
+                            return <Component {...fieldProps} />
                         } else {
                             console.log("Form component not found or field.show is false: " + field.type)
                             return null
