@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, forwardRef, useImperativeHandle } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
@@ -50,7 +50,7 @@ const formComponents = {
     starRating: StarRating,
 }
 
-export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
+const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => {
     const schemaObject = {},
         defaultValues = {}
     // console.log({ config })
@@ -129,9 +129,9 @@ export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
     const validationSchema = Yup.object().shape(schemaObject)
 
     const {
-        handleSubmit, // only called after validation passes
+        handleSubmit, // called after validation passes
         control,
-        formState,
+        watch,
         setValue,
         trigger,
     } = useForm({
@@ -139,9 +139,18 @@ export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
         defaultValues: defaultValues,
     })
 
-    useEffect(() => {
-        // console.log(formState.errors)
-    }, [formState.errors])
+    // expose form functions to parent components
+    useImperativeHandle(ref, () => ({
+        triggerValidation() {
+            return trigger()
+        },
+        setValue(name, value) {
+            setValue(name, value)
+        },
+        watch(args) {
+            watch(...args)
+        },
+    }))
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -196,7 +205,7 @@ export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
 
                             return <Component {...fieldProps} />
                         } else {
-                            console.log("Form component not found or field.show is false: " + field.type)
+                            console.log("Form field component not found or field.show is false: " + field.type)
                             return null
                         }
                     })}
@@ -218,4 +227,6 @@ export default function Form({ config, onSubmit, onFieldUpdated, actions }) {
             </form>
         </LocalizationProvider>
     )
-}
+})
+
+export default Form
