@@ -33,6 +33,7 @@ export default {
     palette,
     typography: {
         fontFamily: "canada-type-gibson, sans-serif", // Roboto
+        fontWeightBold: 600,
         h1: {
             fontSize: 36,
             fontWeight: 600,
