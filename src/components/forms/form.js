@@ -105,9 +105,11 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
                         fieldSchema = fieldSchema.min(1, rule.msg)
                     }
                     break
+                case "minvalue":
                 case "minlength":
                     fieldSchema = fieldSchema.min(rule.value, rule.msg)
                     break
+                case "maxvalue":
                 case "maxlength":
                     fieldSchema = fieldSchema.max(rule.value, rule.msg)
                     break
@@ -120,6 +122,13 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
                     } else if (rule.value === "digits") {
                         fieldSchema = fieldSchema.matches(/^\d+$/, rule.msg)
                     }
+                    break
+                case "regex":
+                    fieldSchema = fieldSchema.matches(rule.value, rule.msg)
+                    break
+                case "custom":
+                    Yup.addMethod(Yup.mixed, rule.name, rule.validate)
+                    fieldSchema = fieldSchema[rule.name](fieldSchema)
                     break
                 default:
                     break
