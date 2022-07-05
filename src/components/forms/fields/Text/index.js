@@ -19,6 +19,7 @@ export default function Text({ fieldData, control }) {
                             onChange={onChange}
                             error={!!error}
                             helperText={error ? error.message : fieldData.description}
+                            type={fieldData.isNumber ? "number" : null}
                         />
                     </FormControlWrapper>
                 )

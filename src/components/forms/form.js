@@ -40,6 +40,7 @@ const formComponents = {
     head: Head,
     label: Label,
     multiSelect: MultiSelect,
+    number: Text,
     switch: Switch,
     text: Text,
     textarea: TextArea,
@@ -77,6 +78,10 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
             case "checkbox":
             case "multiSelect":
                 fieldSchema = Yup.array()
+                break
+            case "number":
+                fieldSchema = Yup.number().typeError("Value must be a number")
+                field.isNumber = true
                 break
             case "switch":
                 fieldSchema = Yup.boolean()
