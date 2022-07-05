@@ -149,6 +149,7 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
         setValue,
         trigger,
     } = useForm({
+        mode: config.config?.validationMode || "onSubmit", // validation mode
         resolver: yupResolver(validationSchema),
         defaultValues: defaultValues,
     })
