@@ -57,8 +57,17 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
     // console.log({ config })
 
     config.fields.forEach(field => {
+        // skip fields that are not properly defined
+        if (!field.hasOwnProperty("type") || !field.hasOwnProperty("name")) {
+            console.log(`All fields must have a name and a type.`)
+            return
+        }
+
         // skip fields that are not in the formComponents object
-        if (!formComponents[field.type]) return
+        if (!formComponents[field.type]) {
+            console.log(`Field ${field.type} is not supported.`)
+            return
+        }
 
         // can't assign null values to inputs, set some empty defaults
         defaultValues[field.name] = [null, undefined].includes(field.value)
