@@ -162,57 +162,43 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <Stack spacing={2} sx={{ borderTop: "0 dashed #bbb" }}>
                     {config.fields.map(field => {
-                        if (field.show && formComponents.hasOwnProperty(field.type)) {
-                            const Component = formComponents[field.type]
-                            const fieldProps = {
-                                key: field.id,
-                                fieldData: field,
-                                control: control,
-                                actions: actions,
-                                form: { setValue, trigger },
-                            }
+                        if (field.hasOwnProperty("show") && !field.show) return null
+                        const Component = formComponents[field.type]
+                        const fieldProps = {
+                            fieldData: field,
+                            control: control,
+                            actions: actions,
+                            form: { setValue, trigger },
+                        }
 
-                            // TODO: refactor these wrapping components (behaviors?)
-                            if (field.params?.hide_on) {
-                                if (field.params?.watch && onFieldUpdated) {
-                                    return (
-                                        <HideableField key={field.id} fieldData={field} control={control}>
-                                            <WatchableField
-                                                key={field.id}
-                                                fieldData={field}
-                                                control={control}
-                                                onFieldUpdated={onFieldUpdated}
-                                            >
-                                                <Component {...fieldProps} />
-                                            </WatchableField>
-                                        </HideableField>
-                                    )
-                                }
+                        // TODO: refactor these wrapping components (behaviors?)
+                        // consider one wrapping component with hooks that have enable flags
+                        if (field.params?.hide_on) {
+                            if (field.params?.watch && onFieldUpdated) {
                                 return (
-                                    <HideableField key={field.id} fieldData={field} control={control}>
-                                        <Component {...fieldProps} />
+                                    <HideableField key={field.name} fieldData={field} control={control}>
+                                        <WatchableField {...fieldProps} onFieldUpdated={onFieldUpdated}>
+                                            <Component {...fieldProps} />
+                                        </WatchableField>
                                     </HideableField>
                                 )
                             }
-
-                            if (field.params?.watch && onFieldUpdated) {
-                                return (
-                                    <WatchableField
-                                        key={field.id}
-                                        fieldData={field}
-                                        control={control}
-                                        onFieldUpdated={onFieldUpdated}
-                                    >
-                                        <Component {...fieldProps} />
-                                    </WatchableField>
-                                )
-                            }
-
-                            return <Component {...fieldProps} />
-                        } else {
-                            console.log("Form field component not found or field.show is false: " + field.type)
-                            return null
+                            return (
+                                <HideableField key={field.name} fieldData={field} control={control}>
+                                    <Component {...fieldProps} />
+                                </HideableField>
+                            )
                         }
+
+                        if (field.params?.watch && onFieldUpdated) {
+                            return (
+                                <WatchableField key={field.name} {...fieldProps} onFieldUpdated={onFieldUpdated}>
+                                    <Component {...fieldProps} />
+                                </WatchableField>
+                            )
+                        }
+
+                        return <Component key={field.name} {...fieldProps} />
                     })}
                     {onSubmit && (
                         <Button

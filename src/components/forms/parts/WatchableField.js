@@ -4,7 +4,7 @@ import { useWatch } from "react-hook-form"
 /**
  * fires a callback when the wrapped field is updated
  */
-export default function WatchableField({ control, fieldData, onFieldUpdated, children }) {
+export default function WatchableField({ control, fieldData, onFieldUpdated, form, children }) {
     const watchedFieldValue = useWatch({
         control,
         name: fieldData.name, // name of the field this component wraps
@@ -21,7 +21,7 @@ export default function WatchableField({ control, fieldData, onFieldUpdated, chi
             return
         }
 
-        onFieldUpdated(fieldData, watchedFieldValue)
+        onFieldUpdated(fieldData, watchedFieldValue, form)
     }, [debouncedValue])
 
     return children
