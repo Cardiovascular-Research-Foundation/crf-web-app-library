@@ -1,4 +1,4 @@
-import { useEffect, forwardRef, useImperativeHandle } from "react"
+import { forwardRef, useImperativeHandle } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
@@ -76,6 +76,7 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
                 : ""
             : field.value
 
+        // TODO: what is this?
         if (typeof field.rules !== "object") return false
 
         // set yup field schema type according to the field type
