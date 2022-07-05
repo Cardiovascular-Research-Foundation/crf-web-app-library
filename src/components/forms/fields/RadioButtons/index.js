@@ -5,6 +5,7 @@ import FieldLabelWrapper from "../../parts/FieldLabelWrapper"
 import FieldWrapper from "../../parts/FieldWrapper"
 
 export default function RadioButtons({ fieldData, control }) {
+    const rowOrColumn = fieldData.params?.inline ? { row: true } : { column: null }
     return (
         <Controller
             name={fieldData.name}
@@ -19,11 +20,7 @@ export default function RadioButtons({ fieldData, control }) {
                             {error && <FormHelperText>{error.message}</FormHelperText>}
                         </FieldLabelWrapper>
                         <FieldWrapper>
-                            <RadioGroup
-                                row={fieldData.params?.inline ? true : null}
-                                column={fieldData.params?.inline ? null : true}
-                                name={fieldData.name}
-                            >
+                            <RadioGroup {...rowOrColumn} name={fieldData.name}>
                                 {fieldData.options.map((option, index) => {
                                     return (
                                         <FormControlLabel
