@@ -1,18 +1,35 @@
 import { FormHelperText, FormLabel } from "@mui/material"
+import { Controller } from "react-hook-form"
 import FormControlWrapper from "../../parts/FormControlWrapper"
 import FieldLabelWrapper from "../../parts/FieldLabelWrapper"
 import FieldWrapper from "../../parts/FieldWrapper"
 
-export default function ReadOnly({ fieldData }) {
+export default function ReadOnly({ fieldData, control }) {
+    const valueSize = fieldData.params?.size || "default"
+    const valueStyles = {
+        default: {},
+        large: {
+            fontSize: "24px",
+        },
+    }
+
     return (
-        <FormControlWrapper>
-            <FieldLabelWrapper mb={1}>
-                <FormLabel sx={{ alignSelf: "center" }}>{fieldData.label}</FormLabel>
-                {fieldData.description && <FormHelperText>{fieldData.description}</FormHelperText>}
-                {fieldData.feedback}
-            </FieldLabelWrapper>
-            <FieldWrapper>{fieldData.value}</FieldWrapper>
-        </FormControlWrapper>
+        <Controller
+            name={fieldData.name}
+            control={control}
+            render={({ field: { value } }) => {
+                return (
+                    <FormControlWrapper>
+                        <FieldLabelWrapper mb={1}>
+                            <FormLabel sx={{ alignSelf: "center" }}>{fieldData.label}</FormLabel>
+                            {fieldData.description && <FormHelperText>{fieldData.description}</FormHelperText>}
+                            {fieldData.feedback}
+                        </FieldLabelWrapper>
+                        <FieldWrapper {...valueStyles[valueSize]}>{value}</FieldWrapper>
+                    </FormControlWrapper>
+                )
+            }}
+        />
     )
 }
 
