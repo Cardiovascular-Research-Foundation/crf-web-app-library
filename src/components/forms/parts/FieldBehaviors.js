@@ -16,7 +16,7 @@ export default function FieldBehaviors({ control, fieldData, onFieldUpdated, for
     const [init, setInit] = useState(false)
 
     // debounce text and textarea fields by default
-    const delay = ["text", "textarea"].includes(fieldData.type) ? 1000 : 0
+    const delay = ["text", "textarea"].includes(fieldData.type) ? 500 : 0
     const debouncedValue = useDebounce(thisFieldValue, delay, fieldData.params?.watch)
 
     // alert watchers that this field has updated
