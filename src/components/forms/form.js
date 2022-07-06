@@ -22,8 +22,7 @@ import ReadOnly from "./fields/ReadOnly"
 import Slider from "./fields/Slider"
 import StarRating from "./fields/StarRating"
 
-import HideableField from "./parts/HideableField"
-import WatchableField from "./parts/WatchableField"
+import FieldBehaviors from "./parts/FieldBehaviors"
 
 // TODO: would this work here?
 // import dynamic from "next/dynamic";
@@ -191,30 +190,11 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
                             form: { setValue, trigger },
                         }
 
-                        // TODO: refactor these wrapping components (behaviors?)
-                        // consider one wrapping component with hooks that have enable flags
-                        if (field.params?.hide_on) {
-                            if (field.params?.watch && onFieldUpdated) {
-                                return (
-                                    <HideableField key={field.name} fieldData={field} control={control}>
-                                        <WatchableField {...fieldProps} onFieldUpdated={onFieldUpdated}>
-                                            <Component {...fieldProps} />
-                                        </WatchableField>
-                                    </HideableField>
-                                )
-                            }
+                        if (field.params?.hide_on || field.params?.watch) {
                             return (
-                                <HideableField key={field.name} fieldData={field} control={control}>
+                                <FieldBehaviors key={field.name} {...fieldProps} onFieldUpdated={onFieldUpdated}>
                                     <Component {...fieldProps} />
-                                </HideableField>
-                            )
-                        }
-
-                        if (field.params?.watch && onFieldUpdated) {
-                            return (
-                                <WatchableField key={field.name} {...fieldProps} onFieldUpdated={onFieldUpdated}>
-                                    <Component {...fieldProps} />
-                                </WatchableField>
+                                </FieldBehaviors>
                             )
                         }
 
