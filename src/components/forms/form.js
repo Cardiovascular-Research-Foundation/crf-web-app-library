@@ -156,6 +156,7 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
         control,
         watch,
         setValue,
+        getValues,
         trigger,
     } = useForm({
         mode: config.config?.validationMode || "onSubmit", // validation mode
@@ -169,10 +170,13 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
             return trigger()
         },
         setValue(name, value) {
-            setValue(name, value)
+            return setValue(name, value)
+        },
+        getValues(name) {
+            return getValues(name)
         },
         watch(args) {
-            watch(...args)
+            return watch(...args)
         },
     }))
 
@@ -187,7 +191,7 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
                             fieldData: field,
                             control: control,
                             actions: actions,
-                            form: { setValue, trigger },
+                            form: { setValue, trigger, getValues },
                         }
 
                         if (field.params?.hide_on || field.params?.watch) {
