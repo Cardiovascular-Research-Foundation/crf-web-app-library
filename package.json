@@ -1,9 +1,8 @@
 {
   "name": "@cardiovascular-research-foundation/crf-web-app-library",
-  "version": "1.0.1",
+  "version": "0.5.0",
   "description": "CRF web application library for building CRF React web applications",
   "main": "src/index.jsx",
-  "scripts": {},
   "author": "CRF Dev Team",
   "repository": {
     "type": "git",
