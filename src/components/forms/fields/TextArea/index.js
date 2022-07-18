@@ -11,7 +11,7 @@ export default function TextArea({ fieldData, control }) {
                 return (
                     <FormControlWrapper>
                         <TextField
-                            variant="filled"
+                            variant="outlined"
                             multiline
                             rows={fieldData.options?.rows || 4}
                             required={!!fieldData.rules?.required}

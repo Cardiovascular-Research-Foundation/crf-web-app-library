@@ -183,7 +183,7 @@ const Form = forwardRef(({ config, onSubmit, onFieldUpdated, actions }, ref) => 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <Stack spacing={2} sx={{ borderTop: "0 dashed #bbb" }}>
+                <Stack spacing={2}>
                     {config.fields.map(field => {
                         if (field.hasOwnProperty("show") && !field.show) return null
                         const Component = formComponents[field.type]

@@ -64,7 +64,7 @@ export default {
             marginBottom: 24,
         },
         button: {
-            fontStyle: "italic",
+            // fontStyle: "italic",
         },
     },
     forms: {
@@ -94,7 +94,7 @@ export default {
         },
         MuiButtonBase: {
             defaultProps: {
-                disableRipple: true,
+                disableRipple: false,
             },
         },
         MuiAppBar: {
@@ -156,7 +156,7 @@ export default {
         MuiFormLabel: {
             styleOverrides: {
                 root: {
-                    fontWeight: 500,
+                    fontWeight: 400,
                     color: palette.primary.main,
                 },
             },

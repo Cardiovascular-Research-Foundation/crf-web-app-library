@@ -5,7 +5,7 @@ import { Stack, Menu, MenuItem, ListItemIcon, Tooltip, Typography, IconButton, B
 import { AccountCircle, Settings, Logout } from "@mui/icons-material"
 import { useAppConfig } from "../providers/AppConfigProvider"
 
-export default function UserMenu({ variant = "dark" }) {
+export default function UserMenu({ variant = "light" }) {
     const [anchorElUser, setAnchorElUser] = useState(null)
     const { data: session } = useSession()
     const { config } = useAppConfig()
@@ -28,7 +28,7 @@ export default function UserMenu({ variant = "dark" }) {
             color: "#fff",
         },
         light: {
-            color: "#000",
+            color: "#666",
         },
     }
 

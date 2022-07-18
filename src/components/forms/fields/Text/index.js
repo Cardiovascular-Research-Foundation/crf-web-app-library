@@ -11,7 +11,7 @@ export default function Text({ fieldData, control }) {
                 return (
                     <FormControlWrapper>
                         <TextField
-                            variant="filled"
+                            variant="outlined"
                             required={!!fieldData.rules?.required}
                             value={value}
                             label={fieldData.label}
