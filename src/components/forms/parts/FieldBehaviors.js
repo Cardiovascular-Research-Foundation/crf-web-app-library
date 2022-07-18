@@ -19,7 +19,7 @@ export default function FieldBehaviors({ control, fieldData, onFieldUpdated, for
     const delay = ["text", "textarea"].includes(fieldData.type) ? 500 : 0
     const debouncedValue = useDebounce(thisFieldValue, delay, fieldData.params?.watch)
 
-    // alert watchers that this field has updated
+    // alert watchers when this field is updated
     useEffect(() => {
         // do not fire on first mount
         if (!init) {
@@ -27,7 +27,7 @@ export default function FieldBehaviors({ control, fieldData, onFieldUpdated, for
             return
         }
 
-        onFieldUpdated(fieldData, thisFieldValue, form)
+        onFieldUpdated && onFieldUpdated(fieldData, thisFieldValue, form)
     }, [debouncedValue])
 
     // show/hide this field
